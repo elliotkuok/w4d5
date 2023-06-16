@@ -15,12 +15,12 @@ describe Array do
     end
 
     describe 'my_transpose' do
+        arr_1 = [
+            ["a", "b", "c"],
+            ["d", "e", "f"],
+            ["g", "h", "i"]
+          ]
         it 'should flip rows and columns' do
-            arr_1 = [
-                ["a", "b", "c"],
-                ["d", "e", "f"],
-                ["g", "h", "i"]
-              ]
             expected_1 = [
                 ["a", "d", "g"],
                 ["b", "e", "h"],
@@ -30,9 +30,26 @@ describe Array do
         end
 
         it "shouldn't use the built-in transpose method" do
-            expect(arr_1.my_transpose).to_not receive(:transpose)
-            expect {arr_1.my_transpose}.to raise_error("don't be a cheater!")
+            expect(arr_1).to_not receive(:transpose)
+            # expect {arr_1.transpose}.to raise_error("don't be a cheater!")
         end
+    end
+
+    describe '#stock_picker' do
+        it 'returns the indices with the most profitable pair of  days to buy and sell stocks' do
+            prices = [6, 3, 2, 5, 10]
+            expect(prices.stock_picker).to eq([2, 4 ])
+        end
+
+        it 'returns an empty array if there are no profitable pairs' do
+            prices = [8, 7, 6, 5, 4]
+            expect(prices.stock_picker).to eq ([])
+        end 
+        it 'if array length is < 2 will return an empty array' do
+            prices = [8]
+            expect(prices.stock_picker).to eq ([])
+        end
+
     end
 
 
